@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main() {
+    float r, c, m, e, total, percentage;
+    printf("Enter marks in R (out of 40): ");
+    scanf("%f", &r);
+
+    printf("Enter marks in C (out of 40): ");
+    scanf("%f", &c);
+
+    printf("Enter marks in Math (out of 40): ");
+    scanf("%f", &m);
+
+    printf("Enter marks in English (out of 40): ");
+    scanf("%f", &e);
+    total = r + c + m + e;
+    percentage = (total / 160) * 100; 
+    printf("\nTotal Marks = %.2f / 160\n", total);
+    printf("Percentage = %.2f%%\n", percentage);
+
+    return 0;
+}
