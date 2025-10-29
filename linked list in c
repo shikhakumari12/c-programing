@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node{
+    int data;
+    struct Node* next;
+};
+struct Node* head;
+void insert(int x){
+    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=x;
+    newNode->next=NULL;
+    if (head==NULL){
+        head=newNode;
+        printf("%d",newNode->data);
+    }
+    else{
+        struct Node* temp;
+        temp=head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp=newNode;
+        printf("%d",newNode->data);
+    }
+}
+void delete(){
+    struct Node* temp;
+    if (head==NULL){
+        printf("The node is empty");
+    }
+    else{
+        temp=head;
+        head=head->next;
+        printf("The deleted element is : %d",temp->data);
+        free(temp);
+    }
+}
+int main(){
+
+    insert(34);
+    insert(46);
+    delete();
+    return 0;
+}
