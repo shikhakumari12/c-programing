@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int main() {
+    struct Node* top = NULL;
+
+    struct Node* n1 = (struct Node*)malloc(sizeof(struct Node));
+    n1->data = 10;
+    n1->next = top;
+    top = n1;
+
+    struct Node* n2 = (struct Node*)malloc(sizeof(struct Node));
+    n2->data = 20;
+    n2->next = top;
+    top = n2;
+
+    struct Node* n3 = (struct Node*)malloc(sizeof(struct Node));
+    n3->data = 30;
+    n3->next = top;
+    top = n3;
+
+    printf("Stack elements: ");
+    struct Node* temp = top;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+
+    if (top != NULL) {
+        printf("%d popped\n", top->data);
+        struct Node* del = top;
+        top = top->next;
+        free(del);
+    }
+
+    printf("Stack elements: ");
+    temp = top;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+
+    return 0;
+}
