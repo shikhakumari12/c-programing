@@ -1,0 +1,36 @@
+#include <stdio.h>
+#define MAX 100
+
+int main() {
+    int arr[MAX];
+    int top = -1;
+
+    // Push 20
+    if (top < MAX - 1) {
+        arr[++top] = 20;
+    }
+
+    // Push 35
+    if (top < MAX - 1) {
+        arr[++top] = 35;
+    }
+
+    // Print stack
+    printf("Stack elements:\n");
+    for (int i = top; i >= 0; i--) {
+        printf("%d->\n", arr[i]);
+    }
+
+    // Pop last inserted element (top)
+    if (top >= 0) {
+        printf("%d popped\n", arr[top--]);
+    }
+
+    // Print stack after pop
+    printf("The stack after popping:\n");
+    for (int i = top; i >= 0; i--) {
+        printf("%d\n", arr[i]);
+    }
+
+    return 0;
+}
