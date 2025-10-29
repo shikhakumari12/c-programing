@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct  Node{
+    int data;
+    struct Node*next;
+};
+struct Node *head = NULL;
+void insert (int x){
+    struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode -> data = x;
+    newnode -> next = head;
+    if(head == NULL){
+        head = newnode;
+        newnode -> next = head;
+        printf("%d",newnode->data);
+    }
+    else {
+        struct Node*temp = head;
+        while (temp -> next != head){
+            temp = temp -> next;
+            temp -> next = newnode;
+            newnode -> next = head;
+        }
+        printf("%d",newnode->data);
+    }
+}
+        
+int main(){
+    insert(34);
+    
+}
