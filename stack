@@ -1,0 +1,56 @@
+#include <stdio.h>
+#define MAX 100
+int stack[MAX], top = -1;
+// push function
+void push(int x) {
+    if (top == MAX - 1) {
+        printf("Stack Overflow\n");
+    } else {
+        stack[++top] = x;
+    }
+}
+// pop function
+int pop() {
+    if (top == -1) {
+        printf("Stack Underflow\n");
+        return -1;
+    } else {
+        return stack[top--];
+    }
+}
+// function to display stack
+void display() {
+    if (top == -1) {
+        printf("Stack is empty\n");
+    } else {
+        for (int i = top; i >= 0; i--) {
+            printf("%d ", stack[i]);
+        }
+        printf("\n");
+    }
+}
+// reverse stack using array
+void reverse() {
+    int temp[MAX], i = 0;
+    // pop all elements from stack and put into temp
+    while (top != -1) {
+        temp[i++] = pop();
+    }
+    // push all elements of temp back into stack
+    for (int j = 0; j < i; j++) {
+        push(temp[j]);
+    }
+}
+int main() {
+    // inserting elements
+    push(10);
+    push(20);
+    push(30);
+    push(40);
+    printf("Original Stack: ");
+    display();
+    reverse();
+    printf("Reversed Stack: ");
+    display();
+    return 0;
+}
