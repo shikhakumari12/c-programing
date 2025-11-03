@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+struct Node {
+    char data;
+    struct Node*left,*right;
+};
+
+struct Node* createNode(char data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->left = node->right = NULL;
+    return node;
+}
+struct Stack {
+    int top;
+    struct Node* arr[100];
+};
+
+void push(struct Stack* stack, struct Node* node) {
+    stack->arr[++stack->top] = node;
+}
+
+struct Node* pop(struct Stack* stack) {
+    return stack->arr[stack->top--];
+}
+struct Node* constructTree(char postfix[]) {
+    struct Stack stack;
+    stack.top = -1;
+
+    for (int i = 0; postfix[i]; i++) {
+        char ch = postfix[i];
+        if (isspace(ch)) continue;
+
+        if (isalnum(ch)) {
+            push(&stack, createNode(ch));
+        } else { 
+            struct Node* node = createNode(ch);
+            node->right = pop(&stack);
+            node->left = pop(&stack);
+            push(&stack, node);
+        }
+    }
+
+    return pop(&stack);
+}
+void inorder(struct Node* root) {
+    if (root == NULL) return;
+    if (root->left || root->right) printf("(");
+    inorder(root->left);
+    printf("%c", root->data);
+    inorder(root->right);
+    if (root->left || root->right) printf(")");
+}
+
+void preorder(struct Node* root) {
+    if (root == NULL) return;
+    printf("%c", root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+void postorder(struct Node* root) {
+    if (root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%c", root->data);
+}
+
+int main() {
+    char postfix[100];
+    printf("Enter postfix expression: ");
+    fgets(postfix, sizeof(postfix), stdin);
+    postfix[strcspn(postfix, "\n")] = '\0';
+
+
+    struct Node* root = constructTree(postfix);
+
+    printf("\nInfix  : ");
+    inorder(root);
+    printf("\nPrefix : ");
+    preorder(root);
+    printf("\nPostfix: ");
+    postorder(root);
+    printf("\n");
+
+    return 0;
+}
