@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    char data;
+        struct Node*left;
+        struct Node*right;
+};
+
+struct Node*createNode(char value){
+    struct Node*newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode -> data = value;
+    newNode -> left = NULL;
+    newNode -> right = NULL;
+    return newNode;
+}
+
+void inorder(struct Node*root){
+    if (root != NULL){
+        inorder(root -> left);
+        printf("%c ",root -> data);
+        inorder(root -> right);
+    }
+}
+
+int main() {
+    
+    struct Node*root = createNode('A');
+    root -> left = createNode('g');
+    root -> right = createNode('V');
+    root -> left -> left = createNode('Y');
+    root -> left -> right = createNode('K');
+    printf("inorder traversal of Tree: ");
+    inorder(root);
+    return 0;
+}
